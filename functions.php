@@ -119,3 +119,15 @@ add_action( 'wp_enqueue_scripts', '_s_scripts' );
  * Implement the Custom Header feature
  */
 //require( get_template_directory() . '/inc/custom-header.php' );
+
+
+
+
+// replace the default posts feed with feedburner
+function appthemes_custom_rss_feed( $output, $feed ) {
+    if ( strpos( $output, 'feed' ) )
+        return $output;
+
+    return esc_url( 'http://feeds.feedburner.com/BlocDeTeknecultura' );
+}
+add_action( 'feed_link', 'appthemes_custom_rss_feed', 10, 2 );
